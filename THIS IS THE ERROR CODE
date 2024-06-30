@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <winsock2.h>
+#pragma comment(lib,"ws2_32.lib")
+int main()
+{
+    WSADATA wd;
+    if (0 != WSAStartup(MAKEWORD(2, 2), &wd))
+    {
+        printf("FAILED TO LOAD,CODE:%d\n",GetLastError());
+        return 0;
+    }
+    SOCKET sockServ = socket(AF_INET,SOCK_STREAM,0);
+    SOCKADDR_IN addrServ;
+    addrServ.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+    addrServ.sin_family=AF_INET;
+    addrServ.sin_port=htons(80);
+    bind(sockServ,(sockaddr*)&addrServ,sizeof(addrServ));
+    listen(sockServ,5);
+    while (1)
+    {
+    return 0;
+    }
+    return 0;
+
+}
